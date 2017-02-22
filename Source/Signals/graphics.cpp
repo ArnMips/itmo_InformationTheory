@@ -6,10 +6,6 @@ Graphics::Graphics(QList<QPointF> points, QWidget* parent)
 {
     updateChart(points);
 
-    //_chart->createDefaultAxes();
-    //_chart->axisX()->setRange(0, points.size()); // points.size() == maxX
-    //_chart->axisY()->setRange(-20, 20);
-
     QChartView *chartView = new QChartView(_chart, this);
     chartView->setRenderHint(QPainter::Antialiasing);
 
