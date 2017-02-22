@@ -32,6 +32,6 @@ void Graphics::updateChart(QList<QPointF> points)
 
     _chart->legend()->hide();
     _chart->createDefaultAxes();
-    _chart->axisX()->setRange(minX, maxX); // points.size() == maxX
+    _chart->axisX()->setRange(minX, maxX);
     _chart->axisY()->setRange(minY, maxY);
 }
