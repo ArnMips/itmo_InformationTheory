@@ -1,37 +1,34 @@
-#include "graphics.h"
+#include "graph.h"
 
-Graphics::Graphics(QList<QPointF> points, QWidget* parent)
-    : QWidget(parent)
-    , _chart(new QChart())
+void Graph::drawLineGraph(QCustomPlot *graph, QVector<double> x, QVector<double> y)
 {
-    updateChart(points);
+    double minX = *std::min_element(x.constBegin(), x.constEnd());
+    double maxX = *std::max_element(x.constBegin(), x.constEnd());
+    double minY = *std::min_element(y.constBegin(), y.constEnd());
+    double maxY = *std::max_element(y.constBegin(), y.constEnd());
 
-    QChartView *chartView = new QChartView(_chart, this);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    QHBoxLayout* layout = new QHBoxLayout;
-    layout->addWidget(chartView);
-
-    parent->setLayout(layout);
+    graph->clearGraphs();
+    graph->addGraph();
+    graph->graph(0)->setData(x, y);
+    graph->xAxis->setRange(minX, maxX);
+    graph->yAxis->setRange(minY, maxY);
+    graph->replot();
 }
 
-void Graphics::updateChart(QList<QPointF> points)
+void Graph::drawBarGraph(QCustomPlot *graph, QVector<double> x, QVector<double> y)
 {
-    QLineSeries *series = new QLineSeries();
-    series->replace(points);
+    double minX = *std::min_element(x.constBegin(), x.constEnd());
+    double maxX = *std::max_element(x.constBegin(), x.constEnd());
+    double minY = *std::min_element(y.constBegin(), y.constEnd());
+    double maxY = *std::max_element(y.constBegin(), y.constEnd());
 
-    _chart->addSeries(series);
+    graph->clearGraphs();
 
-    double minY(INFINITY), maxY(0), minX(INFINITY), maxX(0);
-    for (int i(0); i < points.size(); ++i) {
-        minY = points.at(i).y() < minY ? points.at(i).y() : minY;
-        maxY = points.at(i).y() > maxY ? points.at(i).y() : maxY;
-        minX = points.at(i).x() < minX ? points.at(i).x() : minX;
-        maxX = points.at(i).x() > maxX ? points.at(i).x() : maxX;
-    }
+    QCPBars *newBars = new QCPBars(graph->xAxis, graph->yAxis);
+    newBars->setData(x, y);
+    //newBars->setWidth();
 
-    _chart->legend()->hide();
-    _chart->createDefaultAxes();
-    _chart->axisX()->setRange(minX, maxX);
-    _chart->axisY()->setRange(minY, maxY);
+    graph->xAxis->setRange(minX, maxX);
+    graph->yAxis->setRange(minY, maxY);
+    graph->replot();
 }

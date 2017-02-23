@@ -26,10 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     qcustomplot_lib/qcustomplot.cpp \
-    graphics.cpp
+    graph.cpp
 
 HEADERS  += mainwindow.h \
     qcustomplot_lib/qcustomplot.h \
-    graphics.h
+    graph.h
 
 FORMS    += mainwindow.ui

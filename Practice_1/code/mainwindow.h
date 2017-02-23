@@ -1,6 +1,9 @@
 #pragma once
 #include <QMainWindow>
-#include "qcustomplot_lib/qcustomplot.h"
+
+#include "qcustomplot_lib/qcustomplot.h" //QCustomPlot
+#include "ui_mainwindow.h"
+#include "graph.h"
 
 //=============================================================================
 namespace Ui {

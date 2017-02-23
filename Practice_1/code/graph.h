@@ -1,23 +1,13 @@
 #pragma once
 
 #include <QWidget>
-#include <QtCharts>
-#include <algorithm>
+#include "qcustomplot_lib/qcustomplot.h" //QCustomPlot
 
-using namespace QtCharts;
+///=============================================================================
 
-//=============================================================================
-class Graphics : public QWidget
-{
-    Q_OBJECT
-
+class Graph {
 public:
-    Graphics(QList<QPointF>
-            ,QWidget* parent);
+    void drawLineGraph(QCustomPlot *graph, QVector<double> x, QVector<double> y);
+    void drawBarGraph (QCustomPlot *graph, QVector<double> x, QVector<double> y);
 
-public slots:
-    void updateChart(QList<QPointF>);
-
-private:
-    QChart* _chart;
 };
