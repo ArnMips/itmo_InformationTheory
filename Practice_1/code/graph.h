@@ -5,9 +5,7 @@
 
 ///=============================================================================
 
-class Graph {
-public:
+namespace  Graph {
     void drawLineGraph(QCustomPlot *graph, QVector<double> x, QVector<double> y);
     void drawBarGraph (QCustomPlot *graph, QVector<double> x, QVector<double> y);
-
-};
+}

@@ -1,9 +1,9 @@
 #pragma once
 #include <QMainWindow>
-
 #include "qcustomplot_lib/qcustomplot.h" //QCustomPlot
 #include "ui_mainwindow.h"
 #include "graph.h"
+#include "signal_processor.h"
 
 //=============================================================================
 namespace Ui {
@@ -20,5 +20,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void _mainFunction();
+    QVector<double> _fillAray(const double minV, const double maxV, const double step);
 };
 
