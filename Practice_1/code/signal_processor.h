@@ -1,8 +1,10 @@
 #pragma once
 
 #include <QVector>
+#include <QMap>
 #include <QtMath>
 
+#include <cmath>
 #include <chrono>
 #include <random>
 
@@ -15,13 +17,13 @@ struct SignalProcessor
     QVector<double> getGaussianNoise(const double minV, const double maxV, const int N);
 
     /* Returns an array of N values of analyzed signal */
-    QVector<double> getSignal(const int N = 1000);
+    QVector<double> getSignal(int count, double step, double alfa, double beta, double sigma, double mu);
 
-    /* Returns an array of values with a some 'step' of the signal histogram */
-    QVector<double> createHistogram(const QVector<double>& signal, const double step);
+    /* Returns an array of N values of the signal histogram */
+    QVector<double> createHistogram(const QVector<double>& signal, const int N);
 
-    /* It calculates the value of the signal entropy */
-    double calculateTheEntropy (const QVector<double>& signal);
+    /* It calculates the value of the signal entropy wiyh probability distribution */
+    double calculateTheEntropy (const QVector<double>& pd);
 
     /* It combines the two signals. Steps of both signals must be equal */
     QVector<double> combineSignals(const QVector<double>& signal1, const QVector<double>& signal2 );
@@ -30,11 +32,6 @@ struct SignalProcessor
     QVector<double> createConvolution (const QVector<double>& signal1, const QVector<double>& signal2);
 
 private:
-    const double _DELTA_X = 0.1; // the sampling step
     const double _PI = 3.14159265358979323846;
-    int _N;
-
-    double _functionAk(const double k);
-    double _functionFk(const double k);
-    double _functionSk(const double k);
+    double _functionSk(int k, int count, double step, double alfa, double beta, double sigma, double mu);
 };

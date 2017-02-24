@@ -5,8 +5,7 @@ QVector<double> SignalProcessor::getGaussianNoise(const double minV, const doubl
 {
       unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
       std::default_random_engine generator (seed);
-      std::normal_distribution<double> distribution (0.0,1);//0.0 0.25
-
+      std::normal_distribution<double> distribution (0.0,1.0);//0.0 0.25
 
     QVector<double> points;
     double maxR(0);
@@ -25,34 +24,45 @@ QVector<double> SignalProcessor::getGaussianNoise(const double minV, const doubl
     return points;
 }
 
-QVector<double> SignalProcessor::getSignal(const int N)
+QVector<double> SignalProcessor::getSignal(int count, double step, double alfa, double beta, double sigma, double mu)
 {
-    _N = N; //count number
-
-    QVector<double> points;
-    for (int i(0); i < N; ++i ){
-        points.push_back(_functionSk(i));
+    QVector<double> points(count);
+    for (int i(0); i < count; ++i) {
+        points[i] = _functionSk(i, count, step, alfa, beta, sigma, mu);
     }
+
     return points;
 }
 
-QVector<double> SignalProcessor::createHistogram(const QVector<double>& signal, const double step)
+QVector<double> SignalProcessor::createHistogram(const QVector<double>& signal, const int N)
 {
-    double minY(INFINITY), maxY(0);
+    double minY(signal.at(0)), maxY(signal.at(0));
     for (int i(0); i < signal.size(); ++i) {
         minY = signal.at(i) < minY ? signal.at(i) : minY;
         maxY = signal.at(i) > maxY ? signal.at(i) : maxY;
     }
 
-    int reserveSize = qCeil(qAbs(maxY - minY) / step);
-    QVector<double> hist(reserveSize);
+    double step = qAbs(maxY - minY) / N;
 
-    for (int i = 0; i < signal.size(); ++i) {
-        int index = qFloor((signal.at(i)+qAbs(minY)) / step);
+    QVector<double> hist(N);
+    for (int i = 0; i < N; ++i) {
+        int index = qFloor((signal.at(i) - minY) / step);
         hist[index]++;
     }
 
     return hist;
+}
+
+double SignalProcessor::calculateTheEntropy(const QVector<double> &pd)
+{
+    double entropy(0);
+
+    for (int i(0); i < pd.size(); ++i) {
+        double s = pd.at(i);
+        entropy += s * qLn(s);
+    }
+
+    return entropy * (-1);
 }
 
 QVector<double> SignalProcessor::combineSignals(const QVector<double>& signal1, const QVector<double>& signal2 )
@@ -62,26 +72,16 @@ QVector<double> SignalProcessor::combineSignals(const QVector<double>& signal1, 
     QVector<double> newSignal;
     for (int i = 0; i < size; ++i) {
         newSignal.push_back(signal1.at(i) + signal2.at(i));
-        //newSignal[i].rx() /= 2;
-        //newSignal[i].ry() /= 2;
     }
 
     return newSignal;
 }
 
-double SignalProcessor::_functionFk(const double k)
+double SignalProcessor::_functionSk(int k, int count, double step, double alfa, double beta, double sigma, double mu)
 {
-    double x = _DELTA_X * k;
-    return qPow(x - _N * _DELTA_X / 2, 2) / 20;
-}
+    double x = step * k;
+    double A = alfa/(sigma * qSqrt(2 * _PI)) * qExp(- qPow(x - mu, 2) / (2*sigma*sigma));
+    double F = qPow(x - count * step / 2, 2) / 20;
 
-double SignalProcessor::_functionAk(const double k)
-{
-    double x = _DELTA_X * k;
-    return 500/(10 * qSqrt(2 * _PI)) * qExp(- qPow(x - 50, 2) / (2*10*10));
-}
-
-double SignalProcessor::_functionSk(const double k)
-{
-    return _functionAk(k) * qCos(_functionFk(k));
+    return A * qCos(F);
 }
