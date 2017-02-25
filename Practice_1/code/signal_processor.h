@@ -14,7 +14,7 @@
 struct SignalProcessor
 {   
     /* Returns an array of N values with normal distribution in min..max range */
-    QVector<double> getGaussianNoise(const double minV, const double maxV, const int N);
+    QVector<double> getGaussianNoise(const int count, const double mean, const double deviation);
 
     /* Returns an array of N values of analyzed signal */
     QVector<double> getSignal(int count, double step, double alfa, double beta, double sigma, double mu);

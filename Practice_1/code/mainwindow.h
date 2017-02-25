@@ -19,10 +19,17 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushBtn_signalLoad_clicked();
-    void on_pushBtn_signaReset_clicked();
-    void on_pushBtn_signalHistReset_clicked();
-    void on_pushBtn_signalHistLoad_clicked();
+    void on_btn_signalLoad_clicked();
+    void on_btn_signalReset_clicked();
+    void on_btn_signalHistReset_clicked();
+    void on_btn_signalHistLoad_clicked();
+
+    void on_btn_hoiseReset_clicked();
+    void on_btn_noiseLoad_clicked();
+    void on_btn_noiseHistLoat_clicked();
+    void on_btn_noiseHistReset_clicked();
+
+    void on_btn_signalNoiseLoad_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -32,9 +39,6 @@ private:
     QVector<double> _signalHist;
     QVector<double> _noise;
     QVector<double> _noiseHist;
-    QVector<double> _convolution;
-    QVector<double> _combSingnals;
-    QVector<double> _combSingnalsHist;
 
     void _mainFunction();
     QVector<double> _fillAray(const double minV, const double maxV, const double step);
