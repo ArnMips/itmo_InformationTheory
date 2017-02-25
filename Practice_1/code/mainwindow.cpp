@@ -5,54 +5,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    _mainFunction();
 
     // Graphics defaut setting
     on_btn_signalReset_clicked();
     on_btn_signalHistReset_clicked();
     on_btn_hoiseReset_clicked();
     on_btn_noiseHistReset_clicked();
-
     ui->text_signalNoiseErrorLoad->hide();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::_mainFunction()
-{
-
-//    /// noise -----------------------------------------------------------------
-
-//    QVector<double> noise       = signalproc.getGaussianNoise(0, 0, N); // TODO:
-//    QVector<double> noiseHist   = signalproc.createHistogram(noise, 999);
-////TODO:    double noiseEntropy         = signalproc.calculateTheEntropy(noise);
-
-//    x2 = _fillAray(0, noiseHist.size(), 1);
-
-//    Graph::drawLineGraph(ui->widget_3, x1, noise);
-//    Graph::drawBarGraph(ui->widget_4, x2, noiseHist);
-//    //TODO: write noiseEntropy
-
-//    /// convolution  ----------------------------------------------------------
-
-////TODO:    QVector<double> convolution = signalproc.createConvolution(signal, noise);
-
-////TODO:    Graph::drawLineGraph(ui->widget_5, x, convolution);
-
-//    /// combine singnals  -----------------------------------------------------
-
-//    QVector<double> combSingnals     = signalproc.combineSignals(noise, signal);
-//    QVector<double> combSingnalsHist = signalproc.createHistogram(combSingnals, 999);
-////TODO:    double combSingnalsEntropy       = signalproc.calculateTheEntropy(combSingnals);
-
-//    x2 = _fillAray(0, combSingnalsHist.size(), 1);
-
-//    Graph::drawLineGraph(ui->widget_5, x1, combSingnals);
-//    Graph::drawBarGraph(ui->widget_6, x2, combSingnalsHist);
-//    //TODO:    write combSingnalsEntropy
 }
 
 QVector<double> MainWindow::_fillAray(const double minV, const double maxV, const double step)
@@ -82,7 +46,7 @@ void MainWindow::on_btn_signalLoad_clicked()
     QVector<double> x = _fillAray(0, count, 1);
 
     Graph::drawLineGraph(ui->wdg_signalGraph, x, _signal);
-    ui->lbl_signalentropyValue->setText("Histogram is not load");
+    ui->lbl_signalentropyValue->setText("Histogram isn't load");
 }
 
 void MainWindow::on_btn_signalReset_clicked()
@@ -99,7 +63,7 @@ void MainWindow::on_btn_signalReset_clicked()
 
 void MainWindow::on_btn_signalHistReset_clicked()
 {
-    ui->line_signalHistCount->setText("999"); // магия, если ввести сюда 1000 - не работает
+    ui->line_signalHistCount->setText("1000");
 }
 
 void MainWindow::on_btn_signalHistLoad_clicked()
@@ -109,20 +73,21 @@ void MainWindow::on_btn_signalHistLoad_clicked()
         return;
     }
     ui->lbl_signalHistError->hide();
-    int count = ui->line_signalHistCount->text().toInt();
+    int countHist = ui->line_signalHistCount->text().toInt();
+    int countSignal = ui->line_signalCount->text().toInt();
 
     //create histogram
-    _signalHist  = _signalProc.createHistogram(_signal, count);
-    QVector<double> x = _fillAray(0, count, 1);
+    _signalHist  = _signalProc.createHistogram(_signal, countHist);
+    QVector<double> x = _fillAray(0, countHist, 1);
     Graph::drawBarGraph(ui->wdg_signalHist, x, _signalHist);
 
     //calculate table
-    ui->tblWdg_signalHist->setRowCount(count);
+    ui->tblWdg_signalHist->setRowCount(countHist);
     ui->tblWdg_signalHist->setColumnCount(1);
 
-    QVector<double> pd(count); // probability distribution
-    for (int i(0); i < count; ++i) {
-        pd[i] = _signalHist[i] / count;
+    QVector<double> pd(countHist); // probability distribution
+    for (int i(0); i < countHist; ++i) {
+        pd[i] = _signalHist[i] / countSignal;
         QString item = QString::number(pd[i]);
         ui->tblWdg_signalHist->setItem(i, 0, new QTableWidgetItem(item));
     }
@@ -151,7 +116,7 @@ void MainWindow::on_btn_noiseLoad_clicked()
     QVector<double> x = _fillAray(0, count, 1);
 
     Graph::drawLineGraph(ui->wdg_noise, x, _noise);
-    ui->lbl_noiseEntropyVal->setText("Histogram is not load");
+    ui->lbl_noiseEntropyVal->setText("Histogram isn't load");
 }
 
 void MainWindow::on_btn_noiseHistLoat_clicked()
@@ -161,26 +126,23 @@ void MainWindow::on_btn_noiseHistLoat_clicked()
         return;
     }
     ui->lbl_noiseHistError->hide();
-    int count = ui->line_noiseHistCount->text().toInt();
+    int countHist = ui->line_noiseHistCount->text().toInt();
+    int countNoise = ui->line_noiseCount->text().toInt();
 
     //create noise histogram
-    _noiseHist = _signalProc.createHistogram(_noise, count);
-    QVector<double> x = _fillAray(0, count, 1);
+    _noiseHist = _signalProc.createHistogram(_noise, countHist);
+    QVector<double> x = _fillAray(0, countHist, 1);
     Graph::drawBarGraph(ui->wdg_noiseHist, x, _noiseHist);
 
     //calculate noise table
-    ui->tbl_noiseHistProbability->setRowCount(count);
-    ui->tbl_noiseHistProbability->setColumnCount(2);
+    ui->tbl_noiseHistProbability->setRowCount(countHist);
+    ui->tbl_noiseHistProbability->setColumnCount(1);
 
-    QVector<double> pd(count); // probability distribution
-    for (int i(0); i < count; ++i) {
-        pd[i] = _noiseHist[i] / count;
-
-        QString item1 = QString::number(x[i]);
-        QString item2 = QString::number(pd[i]);
-
-        ui->tbl_noiseHistProbability->setItem(i, 0, new QTableWidgetItem(item1));
-        ui->tbl_noiseHistProbability->setItem(i, 1, new QTableWidgetItem(item2));
+    QVector<double> pd(countHist); // probability distribution
+    for (int i(0); i < countHist; ++i) {
+        pd[i] = _noiseHist[i] / countNoise;
+        QString item = QString::number(pd[i]);
+        ui->tbl_noiseHistProbability->setItem(i, 0, new QTableWidgetItem(item));
     }
 
     //calculate noise entropy
@@ -191,7 +153,7 @@ void MainWindow::on_btn_noiseHistLoat_clicked()
 
 void MainWindow::on_btn_noiseHistReset_clicked()
 {
-    ui->line_noiseHistCount->setText("999");
+    ui->line_noiseHistCount->setText("1000");
 }
 
 void MainWindow::on_btn_signalNoiseLoad_clicked()
@@ -227,6 +189,8 @@ void MainWindow::on_btn_signalNoiseLoad_clicked()
         ui->text_signalNoiseErrorLoad->show();
         return;
     }
+
+    ui->text_signalNoiseErrorLoad->hide();
     //----------------------------------------------------------------------------
 
     /// signal+noise graph ---------------------------------------
@@ -242,18 +206,15 @@ void MainWindow::on_btn_signalNoiseLoad_clicked()
     Graph::drawBarGraph(ui->wdg_signalNoiseHist, x2, _combSingnalsHist);
 
     /// calculate probability table ------------------------------
-    ui->tblWdg_signalHist->setRowCount(histCount);
-    ui->tblWdg_signalHist->setColumnCount(2);
+    ui->tbl_signalNoiseProbability->setRowCount(histCount);
+    ui->tbl_signalNoiseProbability->setColumnCount(1);
 
     QVector<double> pd(histCount); // probability distribution
     for (int i(0); i < histCount; ++i) {
-        pd[i] = _combSingnalsHist[i] / histCount;
+        pd[i] = _combSingnalsHist[i] / combSingnalsCount;
+        QString item = QString::number(pd[i]);
+        ui->tbl_signalNoiseProbability->setItem(i, 0, new QTableWidgetItem(item));
 
-        QString item1 = QString::number(x2[i]);
-        QString item2 = QString::number(pd[i]);
-
-        ui->tbl_signalNoiseProbability->setItem(i, 0, new QTableWidgetItem(item1));
-        ui->tbl_signalNoiseProbability->setItem(i, 1, new QTableWidgetItem(item2));
     }
 
     ///signal+noise entropy --------------------------------------

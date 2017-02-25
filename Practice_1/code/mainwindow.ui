@@ -17,17 +17,8 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
-      <property name="contextMenuPolicy">
-       <enum>Qt::DefaultContextMenu</enum>
-      </property>
-      <property name="tabPosition">
-       <enum>QTabWidget::North</enum>
-      </property>
-      <property name="tabShape">
-       <enum>QTabWidget::Rounded</enum>
-      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tb1Signal">
        <attribute name="title">
@@ -55,7 +46,7 @@
          </layout>
         </item>
         <item row="0" column="1">
-         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1">
+         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0,0,0,0,0">
           <item>
            <widget class="QLabel" name="lbl_signalSettings">
             <property name="font">
@@ -70,36 +61,17 @@
            </widget>
           </item>
           <item>
-           <layout class="QFormLayout" name="formLayout">
+           <layout class="QFormLayout" name="formLayout_7">
             <property name="labelAlignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
             <item row="0" column="0">
              <widget class="QLabel" name="lbl_signalStep">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="text">
                <string>Step (Δx):</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="line_signalStep">
-              <property name="maximumSize">
-               <size>
-                <width>50</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="placeholderText">
-               <string/>
               </property>
              </widget>
             </item>
@@ -175,6 +147,12 @@
             </item>
             <item row="4" column="1">
              <widget class="QLineEdit" name="line_signalMu">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="maximumSize">
                <size>
                 <width>50</width>
@@ -192,6 +170,12 @@
             </item>
             <item row="5" column="1">
              <widget class="QLineEdit" name="line_signalSigma">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="maximumSize">
                <size>
                 <width>50</width>
@@ -200,36 +184,69 @@
               </property>
              </widget>
             </item>
-            <item row="6" column="0">
-             <widget class="QPushButton" name="btn_signalReset">
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="line_signalStep">
               <property name="maximumSize">
                <size>
-                <width>80</width>
+                <width>50</width>
                 <height>16777215</height>
                </size>
               </property>
+              <property name="placeholderText">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="btn_signalReset">
               <property name="text">
                <string>Reset</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="1">
+            <item>
              <widget class="QPushButton" name="btn_signalLoad">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
               <property name="text">
                <string>Load</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="1">
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="Line" name="line_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="lbl_signalEntropy">
+              <property name="text">
+               <string>Entropy value:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="lbl_signalentropyValue">
               <property name="enabled">
                <bool>true</bool>
@@ -259,13 +276,6 @@
               </property>
              </widget>
             </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="lbl_signalEntropy">
-              <property name="text">
-               <string>Entropy value:</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
          </layout>
@@ -291,7 +301,7 @@
          </layout>
         </item>
         <item row="2" column="1">
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QLabel" name="lbl__signalHistSettings">
             <property name="font">
@@ -306,7 +316,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QFormLayout" name="formLayout_2">
+           <layout class="QFormLayout" name="formLayout">
             <item row="0" column="0">
              <widget class="QLabel" name="lbl_signalHistCount">
               <property name="text">
@@ -327,27 +337,19 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
              <widget class="QPushButton" name="btn_signalHistReset">
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
               <property name="text">
                <string>Reset</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item>
              <widget class="QPushButton" name="btn_signalHistLoad">
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
               <property name="text">
                <string>Load</string>
               </property>
@@ -409,6 +411,13 @@
            </widget>
           </item>
           <item>
+           <widget class="Line" name="line_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="lbl_signalHistProbability">
             <property name="font">
              <font>
@@ -423,20 +432,11 @@
           </item>
           <item>
            <widget class="QTableWidget" name="tblWdg_signalHist">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
             <property name="maximumSize">
              <size>
               <width>180</width>
               <height>16777215</height>
              </size>
-            </property>
-            <property name="sortingEnabled">
-             <bool>true</bool>
             </property>
             <attribute name="horizontalHeaderVisible">
              <bool>false</bool>
@@ -461,11 +461,17 @@
        <attribute name="title">
         <string>Gaussian noise</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,0" rowminimumheight="1,0,1">
+       <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,1" columnstretch="1,0">
         <item row="0" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1">
           <item>
            <widget class="QLabel" name="lbl_noise">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Gaussian noise graph</string>
             </property>
@@ -476,10 +482,16 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="1" colspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,1">
+        <item row="0" column="1">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
            <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Hoise settings</string>
             </property>
@@ -487,9 +499,6 @@
           </item>
           <item>
            <layout class="QFormLayout" name="formLayout_3">
-            <property name="labelAlignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="lbl_noiseCount">
               <property name="text">
@@ -498,7 +507,14 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="line_noiseCount"/>
+             <widget class="QLineEdit" name="line_noiseCount">
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="lbl_noiseMean">
@@ -508,7 +524,14 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="line_noiseMean"/>
+             <widget class="QLineEdit" name="line_noiseMean">
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="lbl_noiseDeviation">
@@ -518,36 +541,71 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="line_noiseDeviation"/>
+             <widget class="QLineEdit" name="line_noiseDeviation">
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
             </item>
-            <item row="3" column="0">
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
              <widget class="QPushButton" name="btn_hoiseReset">
               <property name="text">
                <string>Reset</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item>
              <widget class="QPushButton" name="btn_noiseLoad">
               <property name="text">
                <string>Load</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="Line" name="line_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QFormLayout" name="formLayout_8">
+            <item row="0" column="0">
              <widget class="QLabel" name="lbl_noiseEntropy">
               <property name="text">
                <string>Entropy value:</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="0" column="1">
              <widget class="QLabel" name="lbl_noiseEntropyVal">
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
               <property name="text">
-               <string>Histogram is not load</string>
+               <string>Histogram isn't load</string>
               </property>
               <property name="margin">
                <number>3</number>
@@ -558,17 +616,16 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0" colspan="3">
-         <widget class="Line" name="line_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,1">
           <item>
            <widget class="QLabel" name="lbl_noiseHist">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Distribution histogram </string>
             </property>
@@ -579,10 +636,16 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="2">
-         <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,0,0,0">
+        <item row="2" column="1">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
            <widget class="QLabel" name="lbl_noiseHistSettings">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Histogram settings</string>
             </property>
@@ -590,9 +653,6 @@
           </item>
           <item>
            <layout class="QFormLayout" name="formLayout_4">
-            <property name="labelAlignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="lbl_noiseHistCount">
               <property name="text">
@@ -601,70 +661,94 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="line_noiseHistCount"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="btn_noiseHistReset">
-              <property name="text">
-               <string>Reset</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="btn_noiseHistLoat">
-              <property name="text">
-               <string>Load</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="lbl_noiseHistError">
-              <property name="palette">
-               <palette>
-                <active>
-                 <colorrole role="WindowText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>170</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </active>
-                <inactive>
-                 <colorrole role="WindowText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>170</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </inactive>
-                <disabled>
-                 <colorrole role="WindowText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>120</red>
-                    <green>120</green>
-                    <blue>120</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </disabled>
-               </palette>
-              </property>
-              <property name="text">
-               <string>Please, load the graph</string>
+             <widget class="QLineEdit" name="line_noiseHistCount">
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
               </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QPushButton" name="btn_noiseHistReset">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_noiseHistLoat">
+              <property name="text">
+               <string>Load</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_noiseHistError">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>170</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>170</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="text">
+             <string>Please, load the graph</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="lbl_noiseHistProbability">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Probability</string>
             </property>
@@ -672,12 +756,28 @@
           </item>
           <item>
            <widget class="QTableWidget" name="tbl_noiseHistProbability">
-            <attribute name="verticalHeaderVisible">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <attribute name="horizontalHeaderVisible">
              <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderDefaultSectionSize">
+             <number>20</number>
             </attribute>
            </widget>
           </item>
          </layout>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -725,7 +825,7 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>180</width>
               <height>50</height>
              </size>
             </property>
@@ -768,6 +868,12 @@ p, li { white-space: pre-wrap; }
             </item>
             <item row="0" column="1">
              <widget class="QLineEdit" name="line_signalNoiseHistCount">
+              <property name="maximumSize">
+               <size>
+                <width>140</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>1000</string>
               </property>
@@ -777,6 +883,12 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <widget class="Line" name="line_4">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -793,6 +905,12 @@ p, li { white-space: pre-wrap; }
             </item>
             <item row="0" column="1">
              <widget class="QLabel" name="lbl_signalNoiseEntropyVal">
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="frameShape">
                <enum>QFrame::Box</enum>
               </property>
@@ -814,7 +932,20 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QTableWidget" name="tbl_signalNoiseProbability"/>
+           <widget class="QTableWidget" name="tbl_signalNoiseProbability">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <attribute name="horizontalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderDefaultSectionSize">
+             <number>20</number>
+            </attribute>
+           </widget>
           </item>
          </layout>
         </item>
