@@ -222,6 +222,7 @@ void MainWindow::on_btn_signalNoiseLoad_clicked()
     ui->lbl_signalNoiseEntropyVal->setText(QString::number(entropy));
 
     ///convolution -----------------------------------------------
-    QVector<double> _convolution = _signalProc.createConvolution(_signal, _noise);
-    Graph::drawLineGraph(ui->wdg_signalNoiseConvolution, x2, _convolution);
+    QVector<double> _convolution = _signalProc.createConvolution(_signalHist, _noiseHist);
+    QVector<double> x3 = _fillAray(0, _convolution.size(), 1);
+    Graph::drawBarGraph(ui->wdg_signalNoiseConvolution, x3, _convolution);
 }

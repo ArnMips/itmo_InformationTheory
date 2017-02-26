@@ -7,6 +7,8 @@ void Graph::drawLineGraph(QCustomPlot *graph, QVector<double> x, QVector<double>
     double minY = *std::min_element(y.constBegin(), y.constEnd());
     double maxY = *std::max_element(y.constBegin(), y.constEnd());
 
+    graph->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+
     graph->clearGraphs();
     graph->addGraph();
     graph->graph(0)->setData(x, y);
@@ -27,6 +29,8 @@ void Graph::drawBarGraph(QCustomPlot *graph, QVector<double> x, QVector<double> 
     QCPBars *newBars = new QCPBars(graph->xAxis, graph->yAxis);
     newBars->setData(x, y);
     //newBars->setWidth();
+
+    graph->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
     graph->xAxis->setRange(minX, maxX);
     graph->yAxis->setRange(minY, maxY);

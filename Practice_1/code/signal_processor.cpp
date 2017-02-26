@@ -4,7 +4,7 @@
 QVector<double> SignalProcessor::getGaussianNoise(const int count, const double mean, const double deviation)
 {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine generator (seed);
+    std::default_random_engine generator(seed);
     std::normal_distribution<double> distribution(mean, deviation);
 
     QVector<double> points(count);
@@ -18,10 +18,12 @@ QVector<double> SignalProcessor::getGaussianNoise(const int count, const double 
 QVector<double> SignalProcessor::getSignal(int count, double step, double alfa, double beta, double sigma, double mu)
 {
     QVector<double> points(count);
-    for (int i(0); i < count; ++i) {
-        points[i] = _functionSk(i, count, step, alfa, beta, sigma, mu);
+    for (int k(0); k < count; ++k) {
+        double x = step * k;
+        double A = beta + alfa/(sigma * qSqrt(2 * _PI)) * qExp(- qPow(x - mu, 2) / (2*sigma*sigma));
+        double F = qPow(x - count * step / 2, 2) / 20;
+        points[k] = A * qCos(F);
     }
-
     return points;
 }
 
@@ -48,7 +50,7 @@ double SignalProcessor::calculateTheEntropy(const QVector<double> &pd)
     double entropy(0);
 
     for (int i(0); i < pd.size(); ++i) {
-        entropy += pd[i] == 0 ? 0 : pd[i] * qLn(pd[i]); // ???
+        entropy += (pd[i] == 0) ? (0) : (pd[i] * qLn(pd[i]) / qLn(2));
     }
 
     return entropy * (-1);
@@ -66,25 +68,25 @@ QVector<double> SignalProcessor::combineSignals(const QVector<double>& signal1, 
     return newSignal;
 }
 
-QVector<double> SignalProcessor::createConvolution(const QVector<double> &signal1, const QVector<double> &signal2)
+QVector<double> SignalProcessor::createConvolution(QVector<double> signal1, QVector<double> signal2)
 {
-    int count = signal1.size();
-    QVector<double> conv(count);
+    int nSignal1 = signal1.size();
+    int nSignal2 = signal2.size();
+    int nConv = nSignal1 + nSignal2 - 1;
 
-    for (int i(0); i < count; ++i) {
-        for (int m(0); m < i; ++m) {
-            conv[i] += signal1.at(m) * signal2.at(i - m);
+    signal1.resize(nConv);
+    signal1.insert(nSignal1, nConv - nSignal1, 0.0);
+    signal2.resize(nConv);
+    signal2.insert(nSignal2, nConv - nSignal2, 0.0);
+
+    QVector<double> conv(nConv);
+    for (int i(0); i < nConv; ++i) {
+        conv[i] = 0;
+
+         for (int j(0); j <= i; ++j) {
+            conv[i] += signal1.at(j) * signal2.at(i - j);
         }
     }
-
+    //conv.resize((nConv + 1 )/ 2);
     return conv;
-}
-
-double SignalProcessor::_functionSk(int k, int count, double step, double alfa, double beta, double sigma, double mu)
-{
-    double x = step * k;
-    double A = alfa/(sigma * qSqrt(2 * _PI)) * qExp(- qPow(x - mu, 2) / (2*sigma*sigma));
-    double F = qPow(x - count * step / 2, 2) / 20;
-
-    return A * qCos(F);
 }

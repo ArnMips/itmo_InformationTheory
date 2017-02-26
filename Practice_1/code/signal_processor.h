@@ -4,7 +4,6 @@
 #include <QMap>
 #include <QtMath>
 
-#include <cmath>
 #include <chrono>
 #include <random>
 
@@ -29,9 +28,8 @@ struct SignalProcessor
     QVector<double> combineSignals(const QVector<double>& signal1, const QVector<double>& signal2 );
 
     /* Returns an array of signal сonvolution. Steps of both signals must be equal */
-    QVector<double> createConvolution (const QVector<double>& signal1, const QVector<double>& signal2);
+    QVector<double> createConvolution (QVector<double> signal1, QVector<double> signal2);
 
 private:
     const double _PI = 3.14159265358979323846;
-    double _functionSk(int k, int count, double step, double alfa, double beta, double sigma, double mu);
 };
