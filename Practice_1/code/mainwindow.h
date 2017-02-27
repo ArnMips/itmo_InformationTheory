@@ -39,5 +39,7 @@ private:
     QVector<double> _noiseHist;
 
     QVector<double> _fillAray(const double minV, const double maxV, const double step);
+
+    void _help();
 };
 

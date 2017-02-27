@@ -1,13 +1,9 @@
 #pragma once
 
 #include <QVector>
-#include <QMap>
 #include <QtMath>
-
 #include <chrono>
 #include <random>
-
-#include <QDebug>
 
 //=============================================================================
 struct SignalProcessor
@@ -18,17 +14,19 @@ struct SignalProcessor
     /* Returns an array of N values of analyzed signal */
     QVector<double> getSignal(int count, double step, double alfa, double beta, double sigma, double mu);
 
+    QVector<double> getTriangle(const int count);
+
     /* Returns an array of N values of the signal histogram */
-    QVector<double> createHistogram(const QVector<double>& signal, const int N);
+    QVector<double> createHistogram(const QVector<double> &signal, const double m, QString type = "count"); // "step" or "count" : 'type' of 'm'
 
     /* It calculates the value of the signal entropy wiyh probability distribution */
-    double calculateTheEntropy (const QVector<double>& pd);
+    double calculateTheEntropy (const QVector<double> &pd);
 
     /* It combines the two signals. Steps of both signals must be equal */
-    QVector<double> combineSignals(const QVector<double>& signal1, const QVector<double>& signal2 );
+    QVector<double> combineSignals(const QVector<double> &signal1, const QVector<double> &signal2 );
 
     /* Returns an array of signal сonvolution. Steps of both signals must be equal */
-    QVector<double> createConvolution (QVector<double> signal1, QVector<double> signal2);
+    QVector<double> createConvolution (const QVector<double> &signal1, const QVector<double> &signal2);
 
 private:
     const double _PI = 3.14159265358979323846;

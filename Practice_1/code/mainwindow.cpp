@@ -7,6 +7,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Graphics defaut setting
+    Graph::setDefaultSettings(ui->wdg_signalGraph);
+    Graph::setDefaultSettings(ui->wdg_signalHist);
+    Graph::setDefaultSettings(ui->wdg_noise);
+    Graph::setDefaultSettings(ui->wdg_noiseHist);
+    Graph::setDefaultSettings(ui->wdg_signalNoise);
+    Graph::setDefaultSettings(ui->wdg_signalNoiseConvolution);
+    Graph::setDefaultSettings(ui->wdg_signalNoiseHist);
+
     on_btn_signalReset_clicked();
     on_btn_signalHistReset_clicked();
     on_btn_hoiseReset_clicked();
@@ -31,6 +39,49 @@ QVector<double> MainWindow::_fillAray(const double minV, const double maxV, cons
     }
 
     return arr;
+}
+
+void MainWindow::_help()
+{
+    const int nHist = 1000;
+    const int d = 1000;
+
+    const double step = 0.1;
+    const double alfa  = 500;
+    const double beta  = 1;
+    const double sigma = 10;
+    const double mu    = 50;
+    const double deviation = 1.0;
+    const double mean      = 0.0;
+
+
+
+    qDebug() << "count | signalEntropy | noiseEntropy | bothEntropy";
+
+    for (int nD = 1; nD <= 500; nD++) {
+        int count = nD*d;
+
+        QVector<double> signal      = _signalProc.getSignal(count, step/nD, alfa, beta, sigma, mu);
+        QVector<double> signalHist  = _signalProc.createHistogram(signal, nHist);
+        QVector<double> pdSignal(nHist);
+        for (int j(0); j < nHist; ++j) { pdSignal[j] = signalHist.at(j) / count; }
+        double signalEntropy = _signalProc.calculateTheEntropy(pdSignal);
+
+        QVector<double> noise       = _signalProc.getGaussianNoise(count, mean, deviation);
+        QVector<double> noiseHist   = _signalProc.createHistogram(noise, nHist);
+        QVector<double> pdNoise(nHist);
+        for (int j(0); j < nHist; ++j) { pdNoise[j] = noiseHist.at(j) / count; }
+        double noiseEntropy = _signalProc.calculateTheEntropy(pdNoise);
+
+        QVector<double> combSingnals = _signalProc.combineSignals(signal, noise);
+        QVector<double> combSingnalsHist = _signalProc.createHistogram(combSingnals, nHist);
+        QVector<double> pdComb(nHist);
+        for (int j(0); j < nHist; ++j) { pdComb[j] = combSingnalsHist.at(j) / count; }
+        double bothEntropy = _signalProc.calculateTheEntropy(pdComb);
+
+        qDebug() << bothEntropy;
+
+    }
 }
 
 void MainWindow::on_btn_signalLoad_clicked()
@@ -83,13 +134,15 @@ void MainWindow::on_btn_signalHistLoad_clicked()
 
     //calculate table
     ui->tblWdg_signalHist->setRowCount(countHist);
-    ui->tblWdg_signalHist->setColumnCount(1);
+    ui->tblWdg_signalHist->setColumnCount(2);
 
     QVector<double> pd(countHist); // probability distribution
     for (int i(0); i < countHist; ++i) {
-        pd[i] = _signalHist[i] / countSignal;
-        QString item = QString::number(pd[i]);
-        ui->tblWdg_signalHist->setItem(i, 0, new QTableWidgetItem(item));
+        pd[i] = _signalHist.at(i) / countSignal;
+        QString item1 = QString::number(x.at(i));
+        QString item2 = QString::number(pd.at(i));
+        ui->tblWdg_signalHist->setItem(i, 0, new QTableWidgetItem(item1));
+        ui->tblWdg_signalHist->setItem(i, 1, new QTableWidgetItem(item2));
     }
 
     //calculate entropy
@@ -136,19 +189,20 @@ void MainWindow::on_btn_noiseHistLoat_clicked()
 
     //calculate noise table
     ui->tbl_noiseHistProbability->setRowCount(countHist);
-    ui->tbl_noiseHistProbability->setColumnCount(1);
+    ui->tbl_noiseHistProbability->setColumnCount(2);
 
     QVector<double> pd(countHist); // probability distribution
     for (int i(0); i < countHist; ++i) {
-        pd[i] = _noiseHist[i] / countNoise;
-        QString item = QString::number(pd[i]);
-        ui->tbl_noiseHistProbability->setItem(i, 0, new QTableWidgetItem(item));
+        pd[i] = _noiseHist.at(i) / countNoise;
+        QString item1 = QString::number(x.at(i));
+        QString item2 = QString::number(pd.at(i));
+        ui->tbl_noiseHistProbability->setItem(i, 0, new QTableWidgetItem(item1));
+        ui->tbl_noiseHistProbability->setItem(i, 1, new QTableWidgetItem(item2));
     }
 
     //calculate noise entropy
     double noiseEntropy  = _signalProc.calculateTheEntropy(pd);
     ui->lbl_noiseEntropyVal->setText(QString::number(noiseEntropy));
-
 }
 
 void MainWindow::on_btn_noiseHistReset_clicked()
@@ -198,6 +252,7 @@ void MainWindow::on_btn_signalNoiseLoad_clicked()
     int combSingnalsCount = _signal.size();
     QVector<double> x1 = _fillAray(0, combSingnalsCount, 1);
     Graph::drawLineGraph(ui->wdg_signalNoise, x1, _combSingnals);
+ //           Graph::drawLineGraph(ui->wdg_signalNoise, x1, _signalProc.getTriangle(1000));
 
     /// signal+noise histogram -----------------------------------
     int histCount = ui->line_signalNoiseHistCount->text().toInt();
@@ -207,13 +262,15 @@ void MainWindow::on_btn_signalNoiseLoad_clicked()
 
     /// calculate probability table ------------------------------
     ui->tbl_signalNoiseProbability->setRowCount(histCount);
-    ui->tbl_signalNoiseProbability->setColumnCount(1);
+    ui->tbl_signalNoiseProbability->setColumnCount(2);
 
     QVector<double> pd(histCount); // probability distribution
     for (int i(0); i < histCount; ++i) {
-        pd[i] = _combSingnalsHist[i] / combSingnalsCount;
-        QString item = QString::number(pd[i]);
-        ui->tbl_signalNoiseProbability->setItem(i, 0, new QTableWidgetItem(item));
+        pd[i] = _combSingnalsHist.at(i) / combSingnalsCount;
+        QString item1 = QString::number(x2.at(i));
+        QString item2 = QString::number(pd.at(i));
+        ui->tbl_signalNoiseProbability->setItem(i, 0, new QTableWidgetItem(item1));
+        ui->tbl_signalNoiseProbability->setItem(i, 1, new QTableWidgetItem(item2));
 
     }
 
@@ -221,8 +278,10 @@ void MainWindow::on_btn_signalNoiseLoad_clicked()
     double entropy  = _signalProc.calculateTheEntropy(pd);
     ui->lbl_signalNoiseEntropyVal->setText(QString::number(entropy));
 
-    ///convolution -----------------------------------------------
-    QVector<double> _convolution = _signalProc.createConvolution(_signalHist, _noiseHist);
+    ///convolution -----------------------------------------------  
+    double signalStep = ui->line_signalStep->text().toDouble();
+    QVector<double> noiseHist2 = _signalProc.createHistogram(_noise, signalStep, "step");
+    QVector<double> _convolution = _signalProc.createConvolution(_signalHist, noiseHist2);
     QVector<double> x3 = _fillAray(0, _convolution.size(), 1);
     Graph::drawBarGraph(ui->wdg_signalNoiseConvolution, x3, _convolution);
 }

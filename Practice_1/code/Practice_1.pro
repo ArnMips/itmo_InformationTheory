@@ -35,3 +35,5 @@ HEADERS  += mainwindow.h \
     signal_processor.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES +=

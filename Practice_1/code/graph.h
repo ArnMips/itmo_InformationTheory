@@ -6,6 +6,7 @@
 ///=============================================================================
 
 namespace  Graph {
-    void drawLineGraph(QCustomPlot *graph, QVector<double> x, QVector<double> y);
-    void drawBarGraph (QCustomPlot *graph, QVector<double> x, QVector<double> y);
+    void drawLineGraph(QCustomPlot *graph, const QVector<double>& x, const QVector<double>& y);
+    void drawBarGraph (QCustomPlot *graph, const QVector<double>& x, const QVector<double>& y);
+    void setDefaultSettings(QCustomPlot *graph); //type = "Bar" | "Line"
 }

@@ -27,30 +27,49 @@ QVector<double> SignalProcessor::getSignal(int count, double step, double alfa, 
     return points;
 }
 
-QVector<double> SignalProcessor::createHistogram(const QVector<double>& signal, const int N)
+QVector<double> SignalProcessor::getTriangle(const int count)
 {
-    double minY(signal.at(0)), maxY(signal.at(0));
-    foreach (double var, signal) {
-        minY = var < minY ? var : minY;
-        maxY = var > maxY ? var : maxY;
+    QVector<double> arr(count);
+    for (int i = 0; i < count; ++i) {
+        if (i <= qFloor(count / 2)) {
+            arr[i] =  i / 5;
+        } else {
+            arr[i] = (count - 1 - i) / 5;
+        }
     }
-    double step = qAbs(maxY - minY) / (N - 1);
+    return arr;
+}
 
-    QVector<double> hist(N);
+QVector<double> SignalProcessor::createHistogram(const QVector<double>& signal, const double m, QString type)
+{
+    double minY = *std::min_element(signal.constBegin(), signal.constEnd());
+    double maxY = *std::max_element(signal.constBegin(), signal.constEnd());
+    double step;
+    int n;
+
+    if (type == "count") {
+        n = m;
+        step = qAbs(maxY - minY) / (n - 1);
+    } else if (type == "step") {
+        n = qFloor(qAbs(maxY - minY) / m) + 1;
+        step = m;
+    } else { throw; }
+
+    QVector<double> hist(n);
     for (int i = 0; i < signal.size(); ++i) {
-        double index = qFloor((signal[i] - minY) / step);
+        double index = qFloor((signal.at(i) - minY) / step);
         ++hist[index];
 
     }
     return hist;
 }
 
-double SignalProcessor::calculateTheEntropy(const QVector<double> &pd)
+double SignalProcessor::calculateTheEntropy(const QVector<double>& pd)
 {
     double entropy(0);
 
     for (int i(0); i < pd.size(); ++i) {
-        entropy += (pd[i] == 0) ? (0) : (pd[i] * qLn(pd[i]) / qLn(2));
+        entropy += (pd.at(i) == 0) ? (0) : (pd.at(i) * qLn(pd.at(i)) / qLn(2));
     }
 
     return entropy * (-1);
@@ -68,25 +87,21 @@ QVector<double> SignalProcessor::combineSignals(const QVector<double>& signal1, 
     return newSignal;
 }
 
-QVector<double> SignalProcessor::createConvolution(QVector<double> signal1, QVector<double> signal2)
+QVector<double> SignalProcessor::createConvolution(const QVector<double>& signal1, const QVector<double>& signal2)
 {
-    int nSignal1 = signal1.size();
-    int nSignal2 = signal2.size();
-    int nConv = nSignal1 + nSignal2 - 1;
+    int N1 = signal1.size();
+    int N2 = signal2.size();
+    int M = N1 + N2 - 1;
 
-    signal1.resize(nConv);
-    signal1.insert(nSignal1, nConv - nSignal1, 0.0);
-    signal2.resize(nConv);
-    signal2.insert(nSignal2, nConv - nSignal2, 0.0);
+    QVector<double> conv(M, 0);
 
-    QVector<double> conv(nConv);
-    for (int i(0); i < nConv; ++i) {
-        conv[i] = 0;
-
-         for (int j(0); j <= i; ++j) {
-            conv[i] += signal1.at(j) * signal2.at(i - j);
+    for (int i = 0; i < M; i++) {
+        //if (i % 2 == 0) { continue; }
+        for(int j = qMax(0, i-M+1); j <= qMin(i, M-1); j++) {
+            double s1 = (    (j < 0) ||     (j >= N1)) ? 0 : signal1.at(j);
+            double s2 = ((i - j < 0) || (i - j >= N2)) ? 0 : signal2.at(i-j);
+            conv[i] += s1 * s2;
         }
     }
-    //conv.resize((nConv + 1 )/ 2);
     return conv;
 }
