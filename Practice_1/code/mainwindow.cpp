@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     on_btn_hoiseReset_clicked();
     on_btn_noiseHistReset_clicked();
     ui->text_signalNoiseErrorLoad->hide();
+
 }
 
 MainWindow::~MainWindow()
@@ -39,49 +40,6 @@ QVector<double> MainWindow::_fillAray(const double minV, const double maxV, cons
     }
 
     return arr;
-}
-
-void MainWindow::_help()
-{
-    const int nHist = 1000;
-    const int d = 1000;
-
-    const double step = 0.1;
-    const double alfa  = 500;
-    const double beta  = 1;
-    const double sigma = 10;
-    const double mu    = 50;
-    const double deviation = 1.0;
-    const double mean      = 0.0;
-
-
-
-    qDebug() << "count | signalEntropy | noiseEntropy | bothEntropy";
-
-    for (int nD = 1; nD <= 500; nD++) {
-        int count = nD*d;
-
-        QVector<double> signal      = _signalProc.getSignal(count, step/nD, alfa, beta, sigma, mu);
-        QVector<double> signalHist  = _signalProc.createHistogram(signal, nHist);
-        QVector<double> pdSignal(nHist);
-        for (int j(0); j < nHist; ++j) { pdSignal[j] = signalHist.at(j) / count; }
-        double signalEntropy = _signalProc.calculateTheEntropy(pdSignal);
-
-        QVector<double> noise       = _signalProc.getGaussianNoise(count, mean, deviation);
-        QVector<double> noiseHist   = _signalProc.createHistogram(noise, nHist);
-        QVector<double> pdNoise(nHist);
-        for (int j(0); j < nHist; ++j) { pdNoise[j] = noiseHist.at(j) / count; }
-        double noiseEntropy = _signalProc.calculateTheEntropy(pdNoise);
-
-        QVector<double> combSingnals = _signalProc.combineSignals(signal, noise);
-        QVector<double> combSingnalsHist = _signalProc.createHistogram(combSingnals, nHist);
-        QVector<double> pdComb(nHist);
-        for (int j(0); j < nHist; ++j) { pdComb[j] = combSingnalsHist.at(j) / count; }
-        double bothEntropy = _signalProc.calculateTheEntropy(pdComb);
-
-        qDebug() << bothEntropy;
-
-    }
 }
 
 void MainWindow::on_btn_signalLoad_clicked()
