@@ -1,29 +1,11 @@
 #pragma once
 #include "qcustomplot_lib/qcustomplot.h"
 #include <QVector>
-#include <QMap>
+#include <QString>
 
 ///============================================================================
-class Graph
-{
-public:
-    enum Type { Line, Bar };
+namespace Graph {
 
-    Graph(const QString n, QCustomPlot *pArea, Type t, QVector<double> s = QVector<double>());
-
-    void        reset(const QVector<double> &s);
-    void        draw();
-    int         getCount() const;
-    QString     getName() const;
-    Type        getType() const;
-    double      getMin() const;
-    double      getMax() const;
-    const QVector<double> &getSignal() const;
-
-private:
-
-    QCustomPlot     *_pArea;
-    QVector<double>  _signal;
-    QString _name;
-    Type   _type;
-};
+enum Type { Line, Bar };
+void draw(QCustomPlot *pArea, const QVector<double> &s, Type t);
+}

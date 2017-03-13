@@ -1251,7 +1251,7 @@
                <bool>true</bool>
               </property>
               <property name="text">
-               <string>Reset</string>
+               <string/>
               </property>
               <property name="flat">
                <bool>true</bool>
@@ -2510,7 +2510,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>888</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

@@ -10,17 +10,17 @@ ComplexNum::ComplexNum(double re, double im)
 {
 }
 
-double ComplexNum::re()
+double ComplexNum::re() const
 {
     return _re;
 }
 
-double ComplexNum::im()
+double ComplexNum::im() const
 {
     return _im;
 }
 
-double ComplexNum::abs()
+double ComplexNum::abs() const
 {
     return sqrt(pow(_re, 2) + pow(_im, 2));
 }
@@ -64,3 +64,29 @@ bool ComplexNum::operator==(const ComplexNum &x)
     return (_re == x._re) && (_im == x._im);
 }
 
+QVector<double> toRe(const QVector<ComplexNum> &x)
+{
+    QVector<double> r(x.size());
+    for (int i = 0; i < x.size(); ++i) {
+        r[i] = x.at(i).re();
+    }
+    return r;
+}
+
+QVector<double> toIm(const QVector<ComplexNum> &x)
+{
+    QVector<double> r(x.size());
+    for (int i = 0; i < x.size(); ++i) {
+        r[i] = x.at(i).im();
+    }
+    return r;
+}
+
+QVector<double> toAbs(const QVector<ComplexNum> &x)
+{
+    QVector<double> r(x.size());
+    for (int i = 0; i < x.size(); ++i) {
+        r[i] = x.at(i).abs();
+    }
+    return r;
+}

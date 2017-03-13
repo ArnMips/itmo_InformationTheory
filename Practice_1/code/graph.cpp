@@ -12,6 +12,7 @@ void Graph::drawLineGraph(QCustomPlot *graph, const QVector<double>& x, const QV
 
     graph->graph()->setData(x, y);
     graph->graph()->setPen(QColor(250, 170, 20));
+
     graph->xAxis->setRange(minX, maxX);
     graph->yAxis->setRange(minY, maxY);
     graph->replot();

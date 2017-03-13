@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>891</width>
+    <height>787</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Signal</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,1" columnstretch="1,0">
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signal" native="true"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signal">
+            <property name="text">
+             <string>Signal graph</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Graph settings</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QFormLayout" name="formLayout">
+              <property name="formAlignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lbl_signalStep">
+                <property name="text">
+                 <string>Step (Δx):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalStep">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lbl_signalCount">
+                <property name="text">
+                 <string>Count (K):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalCount">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lbl_signalAlfa">
+                <property name="text">
+                 <string>Var. α:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalAlfa">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lbl_signalBeta">
+                <property name="text">
+                 <string>Var. β:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalBeta">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="lbl_signalMu">
+                <property name="text">
+                 <string>Var. μ:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalMu">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="lbl_signalSigma">
+                <property name="text">
+                 <string>Var. σ:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalSigma">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="chkBox_sin">
+              <property name="text">
+               <string>Show sinus</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="chkBox_signalDtfAbs">
+              <property name="text">
+               <string>Abs / 2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>165</width>
+                <height>18</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalReset">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalLoad">
+                <property name="text">
+                 <string>Load</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pshBtn_signalAllSave">
+              <property name="text">
+               <string>Save all in project folder</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout" rowstretch="0,1">
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signalDtfRe" native="true"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCustomPlot" name="wdg_signalDtfIm" native="true"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signalDtfRe">
+            <property name="text">
+             <string>Real</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="lbl_signalDtfIm">
+            <property name="text">
+             <string>Imaginary</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="lbl_signalDtfAbs">
+            <property name="text">
+             <string>Absolute</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCustomPlot" name="wdg_signalDtfAbs" native="true"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+       <zorder></zorder>
+       <zorder></zorder>
+       <zorder>line</zorder>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Signal cut</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_4" rowstretch="0,1" columnstretch="1,0">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signalCut">
+            <property name="text">
+             <string>Signal graph</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="lbl_signalCutSettings">
+              <property name="text">
+               <string>Cut settings</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QFormLayout" name="formLayout_2">
+              <property name="formAlignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lbl_signalCutFrom">
+                <property name="text">
+                 <string>From:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalCutFrom">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lbl_signalCutTo">
+                <property name="text">
+                 <string>To:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalCutTo">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="chkBox_signalCutDtfAbs">
+              <property name="text">
+               <string>Abs / 2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalCutReset">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalCutLoad">
+                <property name="text">
+                 <string>Load</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pshBtn_signalCutAllSave">
+              <property name="text">
+               <string>Save all in project folder</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signalCut" native="true"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,1">
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signalCutDtfRe" native="true"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCustomPlot" name="wdg_signalCutDtfIm" native="true"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signalCutDtfRe">
+            <property name="text">
+             <string>Real</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="lbl_signalCutDtfIm">
+            <property name="text">
+             <string>Imaginary</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="lbl_signalCutDtfAbs">
+            <property name="text">
+             <string>Absolute</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCustomPlot" name="wdg_signalCutDtfAbs" native="true"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Signal + Noise</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_9" rowstretch="0,1" columnstretch="1,0">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signalNoise">
+            <property name="text">
+             <string>Graph of Signal and noise</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QLabel" name="lbl_signalNoiseSettings">
+              <property name="text">
+               <string>Cut settings</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QFormLayout" name="formLayout_5">
+              <property name="formAlignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lbl_signalNoiseDev">
+                <property name="text">
+                 <string>Deviation:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalNoiseDev">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="chkBox_signalNoiseDtfAbs">
+              <property name="text">
+               <string>Abs / 2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalNoiseReset">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalNoiseLoad">
+                <property name="text">
+                 <string>Load</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pshBtn_signalNoiseAllSave">
+              <property name="text">
+               <string>Save all in project folder</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signalNoise" native="true"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,1">
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signalNoiseDtfRe" native="true"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCustomPlot" name="wdg_signalNoiseDtfIm" native="true"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signalNoiseDtfRe">
+            <property name="text">
+             <string>Real</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="lbl_signalNoiseDtfIm">
+            <property name="text">
+             <string>Imaginary</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="lbl_signalNoiseDtfAbs">
+            <property name="text">
+             <string>Absolute</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCustomPlot" name="wdg_signalNoiseDtfAbs" native="true"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Signal Blur</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_11" rowstretch="0,1" columnstretch="1,0">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signalBlur">
+            <property name="text">
+             <string>Blured signal graph</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,1,1,0,0,0">
+            <item>
+             <widget class="QLabel" name="lbl_signalBlurSettings">
+              <property name="text">
+               <string>Cut settings</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QFormLayout" name="formLayout_6">
+              <property name="formAlignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lbl_signalBlurN">
+                <property name="text">
+                 <string>n:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalBlurN">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lbl_signalBlurD">
+                <property name="text">
+                 <string>d:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lnEdit_signalBlurD">
+                <property name="maximumSize">
+                 <size>
+                  <width>90</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCustomPlot" name="wdg_gauss" native="true"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="chkBox_signalBlurDtfAbs">
+              <property name="text">
+               <string>Abs / 2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="chkBox_signalBlurExtrVal">
+              <property name="text">
+               <string>Extreme values</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalBlurReset">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pshBtn_signalBlurLoad">
+                <property name="text">
+                 <string>Load</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pshBtn_signalBlurAllSave">
+              <property name="text">
+               <string>Save all in project folder</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signalBlur" native="true"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_12" rowstretch="0,1">
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signalBlurDtfRe" native="true"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCustomPlot" name="wdg_signalBlurDtfIm" native="true"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signalBlurDtfRe">
+            <property name="text">
+             <string>Real</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="lbl_signalBlurDtfIm">
+            <property name="text">
+             <string>Imaginary</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="lbl_signalCBlurDtfAbs">
+            <property name="text">
+             <string>Absolute</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCustomPlot" name="wdg_signalBlurDtfAbs" native="true"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>891</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot_lib/qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
