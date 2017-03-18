@@ -1,14 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-03-07T23:13:19
+# Project created by QtCreator 2017-03-15T11:44:53
 #
 #-------------------------------------------------
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
-TARGET = Practice_2
+TARGET = Practice_3
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,8 +24,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    graph.cpp \
+    qcustomplot_lib/qcustomplot.cpp \
+    my_lib/complexnum.cpp \
+    functions.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    graph.h \
+    qcustomplot_lib/qcustomplot.h \
+    my_lib/complexnum.h \
+    functions.h
+
 
 FORMS    += mainwindow.ui

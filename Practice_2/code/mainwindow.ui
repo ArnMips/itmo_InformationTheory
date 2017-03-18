@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -26,17 +26,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,1" columnstretch="1,0">
-          <item row="1" column="0">
-           <widget class="QCustomPlot" name="wdg_signal" native="true"/>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="lbl_signal">
-            <property name="text">
-             <string>Signal graph</string>
-            </property>
-           </widget>
-          </item>
+         <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0" columnstretch="1,0">
           <item row="0" column="1" rowspan="2">
            <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
@@ -209,6 +199,16 @@
             </item>
            </layout>
           </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_signal">
+            <property name="text">
+             <string>Signal graph</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCustomPlot" name="wdg_signal" native="true"/>
+          </item>
          </layout>
         </item>
         <item>
@@ -253,7 +253,6 @@
          </layout>
         </item>
        </layout>
-       <zorder></zorder>
        <zorder></zorder>
        <zorder>line</zorder>
       </widget>
